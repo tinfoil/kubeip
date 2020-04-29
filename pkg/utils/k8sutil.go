@@ -87,7 +87,7 @@ func TagNode(node string, ip string) {
 	kubeClient := GetClient()
 	logrus.WithFields(logrus.Fields{"pkg": "kubeip", "function": "tagNode"}).Infof("Tagging node %s as %s", node, ip)
 	dashIp := strings.Replace(ip, ".", "-", 4)
-	labelString := "{" + "\"" + "kubip_assigned" + "\":\"" + dashIp + "\"" + "}"
+	labelString := "{" + "\"" + "kubeip_assigned" + "\":\"" + dashIp + "\"" + "}"
 	patch := fmt.Sprintf(`{"metadata":{"labels":%v}}`, labelString)
 	_, err := kubeClient.CoreV1().Nodes().Patch(node, types_v1.MergePatchType, []byte(patch))
 	if err != nil {
@@ -98,7 +98,7 @@ func TagNode(node string, ip string) {
 func GetNodeByIP(ip string) (string, error) {
 	kubeClient := GetClient()
 	dashIp := strings.Replace(ip, ".", "-", 4)
-	label := fmt.Sprintf("kubip_assigned=%v", dashIp)
+	label := fmt.Sprintf("kubeip_assigned=%v", dashIp)
 	l, err := kubeClient.CoreV1().Nodes().List(meta_v1.ListOptions{
 		LabelSelector: label,
 	})

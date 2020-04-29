@@ -15,3 +15,6 @@ kubeip
 vendor/*
 /.gcpprj
 /key.json
+
+# Sed backup file
+/deploy/*.bak

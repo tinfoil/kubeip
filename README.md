@@ -100,7 +100,7 @@ If you would like to assign addresses to other node pools, then `KUBEIP_NODEPOOL
 You should tag the addresses for this pool with the `KUBEIP_LABELKEY` value + `-node-pool` and assign the value of the node pool a name i.e.,  `kubeip-node-pool=my-node-pool`
 
 <pre>
-sed -i "s/pool-kubip/$KUBEIP_SELF_NODEPOOL/g" deploy/kubeip-deployment.yaml
+sed -i .bak "s/cloud\.google\.com\/gke-nodepool:.*/cloud\.google\.com\/gke-nodepool: $KUBEIP_SELF_NODEPOOL/" deploy/kubeip-deployment.yaml
 </pre>
 
 Deploy kubeIP by running: 
@@ -109,7 +109,7 @@ Deploy kubeIP by running:
 kubectl apply -f deploy/.
 ```
 
-Once you’ve assigned an IP address to a node kubeIP, a label will be created for that node `kubip_assigned` with the value of the IP address (`.` are replaced with `-`):
+Once you’ve assigned an IP address to a node kubeIP, a label will be created for that node `kubeip_assigned` with the value of the IP address (`.` are replaced with `-`):
 
  `172.31.255.255 ==> 172-31-255-255`
 
