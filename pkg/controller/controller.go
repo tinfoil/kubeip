@@ -329,7 +329,7 @@ func (c *Controller) forceAssignment() {
 
 func (c *Controller) assignMissingTags() {
 	kubeClient := utils.GetClient()
-	label := fmt.Sprintf("!kubip_assigned,cloud.google.com/gke-nodepool=%s", c.config.NodePool)
+	label := fmt.Sprintf("!kubeip_assigned,cloud.google.com/gke-nodepool=%s", c.config.NodePool)
 	nodelist, err := kubeClient.CoreV1().Nodes().List(meta_v1.ListOptions{
 		LabelSelector: label,
 	})
